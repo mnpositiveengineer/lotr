@@ -1,0 +1,15 @@
+html, body{
+	margin:0;
+	background-color: rgba(242, 240, 238, 100);
+	height:100%;
+}
+
+h1{
+	text-align: center;
+}
+form {
+	text-align: center;
+}
+input[type=text] {
+	max-width: 250px;
+}

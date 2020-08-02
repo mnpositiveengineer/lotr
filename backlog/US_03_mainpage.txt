@@ -1,0 +1,9 @@
+WHO:
+As a user/visitor
+WHAT:
+I want to enter the mainpage and see that I can find out what hero from Lord of The Ring would I be.
+I want to know that to find out I will have to answer 10 questions and at the end I will need to provide email so that webside can send me information on my email.
+I want to know that I will have a chance to delete my data at the end.
+I want to enter my name/nickname and start questionary.
+WHY
+So that I know what to expect and that my data will be deleted.

@@ -1,0 +1,11 @@
+WHO:
+Application/System
+WHAT:
+Must SELECT, INSERT, UPDATE information from/to following schemes in database:
+users (id:integer, name:string, question:integer, email:string, hero_id:integer:fk)
+questions (id:integer, question:string, answerA:string, answerB:string, answerC:string, answerD:string)
+heros (id: integer, name:string, description:string)
+user_question_hero(user_id:integer:fk, question_id:integer:fk, question_id:integer:fk)
+So schemes above must be created in database.
+WHY:
+To allow application work properly.
