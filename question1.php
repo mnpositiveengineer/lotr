@@ -18,17 +18,100 @@
 </head>	
 </head>
 <body>
-<main>
-	<div class="container-fluid p-0 my-auto">
-	<div class="container p-0 my-auto">
-		<h1>QUESTION 1</h1>
-	</div>
-	</div>
-</main>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="js/bootstrap.min.js"/></script>
+<?php
 
+	require_once "connect.php";
+
+	$connection = @new mysqli($host, $db_user, $db_password, $db_name);
+
+	if($connection -> connect_errno != 0)
+	{
+		echo "Error: ".$connection -> connect_errno;
+		exit();
+		
+	} else {
+		
+		session_start();
+		$id = session_id();
+		
+		if ($result = $connection -> query("SELECT * FROM users WHERE id='$id';")) 
+		{
+			
+			$isUserInDatabase = mysqli_num_rows($result);
+			
+			
+			if ($isUserInDatabase == 1) 
+			{
+				
+				$row = $result -> fetch_assoc();
+				$question = $row['question'];
+				$question_id = 1;
+				
+				if ($question == 1) 
+				{
+					$result -> close();
+					$result_question = $connection -> query("SELECT * FROM questions WHERE id=1");
+					$row_question = $result_question -> fetch_assoc();
+					$question1 = $row_question ['question'];
+					$AnswerA = $row_question ['answerA'];
+					$AnswerB = $row_question ['answerB'];
+					$AnswerC = $row_question ['answerC'];
+					$AnswerD = $row_question ['answerD'];
+					$result_question -> close();
+					$connection -> close();
+									
+				} else {
+					$result -> close();
+					$connection -> close();
+					header('Location: question'.$question.'html');
+					exit();
+				}
+		
+			} else {
+				$result -> close();
+				$connection -> close();
+				header('Location: index.html');
+				exit();
+			}
+		} else {
+		
+		echo "Wrong SQL statement";
+		$connection -> close();
+		exit();
+		
+		}
+	}
+?>	
+
+	<main>
+		<div class='container-fluid p-0 my-auto'>
+			<div class='container p-0 my-auto'>
+				<h1><?php echo ($question1)?></h1>
+				<form method='post' action='question2.php'>
+					<div class='form-group'>
+						<label for='answerA'><?php echo ($AnswerA)?></label>
+						<input type='radio' name='question' value='1' class='form-control' id='answerA'/>
+					</div>
+					<div class='form-group'>
+						<label for='answerB'><?php echo ($AnswerB)?></label>
+						<input type='radio' name='question' value='2' class='form-control' id='answerB'/>
+					</div>
+					<div class='form-group'>
+						<label for='answerC'><?php echo ($AnswerC)?></label>
+						<input type='radio' name='question' value='3' class='form-control' id='answerC'/>
+					</div>
+					<div class='form-group'>
+						<label for='answerD'><?php echo ($AnswerD)?></label>
+						<input type='radio' name='question' value='4' class='form-control' id='answerD'/>
+					</div>										
+					<input type="submit" value="Next"/>
+				</form>
+			</div>
+		</div>
+	</main>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="js/bootstrap.min.js"/></script>
 </body>
 
 </html>

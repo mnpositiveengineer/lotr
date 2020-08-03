@@ -1,0 +1,10 @@
+WHO:
+System/application
+WHAT:
+Should select question and answers from scheme "questions" where id = 1 - 10 (depending on number of question) and display on the screen.
+There should only be one option to answer.
+Each answer will represent each hero_id.
+When user selects one option and click on next, following action will take place:
+- user id, question id, hero id will be insert into "user_question_hero".
+WHY
+To allow user answer the question and and track answers to calculate result at the end.

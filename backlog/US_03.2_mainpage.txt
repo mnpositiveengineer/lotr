@@ -1,0 +1,9 @@
+WHO:
+System/application
+WHAT:
+Should insert name/nickname of user to scheme "users" after submit button is clicked.
+Should insert session_php_id to database to scheme "user" after submit button is clicked.
+Should insert value 1 to scheme "users" in column question after submit button is clicked.
+Should open tha page with first question.
+WHY
+So that user data are saved in database and user can start answering questions.
