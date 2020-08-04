@@ -34,22 +34,28 @@
 		session_start();
 		$id = session_id();
 		
+		
 		if ($result = $connection -> query("SELECT * FROM users WHERE id='$id';")) 
 		{
 			
 			$isUserInDatabase = mysqli_num_rows($result);
 			
-			
 			if ($isUserInDatabase == 1) 
 			{
-				
+				if((isset($_POST['answer']))){
+					$question_answer = $_POST['answer'];
+					$connection -> query("UPDATE users SET question = 9 WHERE id='$id';");
+					$connection -> query("INSERT INTO user_question_hero (user_id, question_id, hero_id) VALUES ('$id', 8, '$question_answer');");
+				}
+				$result -> close();
+				$result = $connection -> query("SELECT * FROM users WHERE id='$id';");
 				$row = $result -> fetch_assoc();
 				$question = $row['question'];
 				
-				if ($question == 1) 
+				if ($question == 9) 
 				{
 					$result -> close();
-					$result_question = $connection -> query("SELECT * FROM questions WHERE id=1");
+					$result_question = $connection -> query("SELECT * FROM questions WHERE id=9");
 					$row_question = $result_question -> fetch_assoc();
 					$question_from_db = $row_question ['question'];
 					$AnswerA = $row_question ['answerA'];
@@ -70,7 +76,7 @@
 					header('Location: question'.$question.'.php');
 					exit();
 				}
-
+		
 			} else {
 				$result -> close();
 				$connection -> close();
@@ -91,7 +97,7 @@
 		<div class='container-fluid p-0 my-auto'>
 			<div class='container p-0 my-auto'>
 				<h1><?php echo ($question_from_db)?></h1>
-				<form method='post' action='question2.php'>
+				<form method='post' action='question10.php'>
 					<div class='form-group'>
 						<label for='answerA'><?php echo ($AnswerA)?></label>
 						<input type='radio' name='answer' value='1' class='form-control' id='answerA'/>
@@ -107,7 +113,7 @@
 					<div class='form-group'>
 						<label for='answerD'><?php echo ($AnswerD)?></label>
 						<input type='radio' name='answer' value='4' class='form-control' id='answerD'/>
-					</div>										
+					</div>											
 					<input type="submit" value="Next"/>
 				</form>
 			</div>

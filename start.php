@@ -26,9 +26,8 @@ if((isset($_POST['name']))){
 		
 		$connection -> query("INSERT INTO users (name, id, question) VALUES ('$name', '$id', 1);");
 		
-		header('Location: question1.php');
-		
 		$connection -> close();
+		header('Location: question1.php');
 	}
 
 } else {

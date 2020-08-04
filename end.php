@@ -34,42 +34,44 @@
 		session_start();
 		$id = session_id();
 		
+		
 		if ($result = $connection -> query("SELECT * FROM users WHERE id='$id';")) 
 		{
 			
 			$isUserInDatabase = mysqli_num_rows($result);
-			
+			$result = $connection -> query("SELECT * FROM users WHERE id='$id';");
+			$row = $result -> fetch_assoc();
+			$question = $row['question'];
 			
 			if ($isUserInDatabase == 1) 
 			{
-				
-				$row = $result -> fetch_assoc();
-				$question = $row['question'];
-				
-				if ($question == 1) 
-				{
+				if((isset($_POST['answer']))){
+					$question_answer = $_POST['answer'];
+					$connection -> query("UPDATE users SET question = 0 WHERE id='$id';");
+					$connection -> query("INSERT INTO user_question_hero (user_id, question_id, hero_id) VALUES ('$id', 10, '$question_answer');");
+					$hero_view = $connection-> query("SELECT a.hero_id, a.amount, h.name, h.description FROM heros h JOIN (SELECT count(*) as amount, hero_id FROM user_question_hero GROUP BY hero_id) a ON h.id = a.hero_id ORDER BY a.amount DESC");
+					$hero_row = $hero_view -> fetch_assoc();
+					$hero_id = $hero_row['hero_id'];
+					$hero_name = $hero_row['name'];
+					$hero_description = $hero_row['description'];
+					$connection -> query("UPDATE users SET hero_id = '$hero_id' WHERE id='$id';");
+					$hero_view -> close();
 					$result -> close();
-					$result_question = $connection -> query("SELECT * FROM questions WHERE id=1");
-					$row_question = $result_question -> fetch_assoc();
-					$question_from_db = $row_question ['question'];
-					$AnswerA = $row_question ['answerA'];
-					$AnswerB = $row_question ['answerB'];
-					$AnswerC = $row_question ['answerC'];
-					$AnswerD = $row_question ['answerD'];
-					$result_question -> close();
-					$connection -> close();
-									
-				} else if ($question == 0)  {
+					$connection -> close();		
+				} else if ($question!=0) {
 					$result -> close();
-					$connection -> close();
-					header('Location: end.php');
-					exit();
-				} else {
-					$result -> close();
-					$connection -> close();
+					$connection -> close();	
 					header('Location: question'.$question.'.php');
-					exit();
-				}
+					exit();		
+				} else {
+					$hero_view = $connection -> query("SELECT h.name, h.description FROM heros h JOIN users u ON u.hero_id = h.id WHERE u.id='$id';");
+					$hero_row = $hero_view -> fetch_assoc();
+					$hero_name = $hero_row['name'];
+					$hero_description = $hero_row['description'];
+					$hero_view -> close();
+					$result -> close();
+					$connection -> close();		
+					}
 
 			} else {
 				$result -> close();
@@ -78,40 +80,21 @@
 				exit();
 			}
 		} else {
-		
 		echo "Wrong SQL statement";
 		$connection -> close();
 		exit();
-		
 		}
 	}
 ?>	
 
 	<main>
-		<div class='container-fluid p-0 my-auto'>
-			<div class='container p-0 my-auto'>
-				<h1><?php echo ($question_from_db)?></h1>
-				<form method='post' action='question2.php'>
-					<div class='form-group'>
-						<label for='answerA'><?php echo ($AnswerA)?></label>
-						<input type='radio' name='answer' value='1' class='form-control' id='answerA'/>
-					</div>
-					<div class='form-group'>
-						<label for='answerB'><?php echo ($AnswerB)?></label>
-						<input type='radio' name='answer' value='2' class='form-control' id='answerB'/>
-					</div>
-					<div class='form-group'>
-						<label for='answerC'><?php echo ($AnswerC)?></label>
-						<input type='radio' name='answer' value='3' class='form-control' id='answerC'/>
-					</div>
-					<div class='form-group'>
-						<label for='answerD'><?php echo ($AnswerD)?></label>
-						<input type='radio' name='answer' value='4' class='form-control' id='answerD'/>
-					</div>										
-					<input type="submit" value="Next"/>
-				</form>
-			</div>
-		</div>
+	<div class="container-fluid p-0 my-auto">
+	<div class="container p-0 my-auto">
+		<h1>YOU ARE <?php echo ($hero_name)?></h1>
+		<p><?php echo ($hero_description)?></p>
+		<a href="logout.php">Delete your data and return to main page</a>
+	</div>
+	</div>
 	</main>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
