@@ -28,7 +28,7 @@ CREATE TABLE `heros` (
   `description` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `heros` (
 
 LOCK TABLES `heros` WRITE;
 /*!40000 ALTER TABLE `heros` DISABLE KEYS */;
-INSERT INTO `heros` VALUES (1,'Frodo','Question:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris congue quis urna sed sodales. Ut ac auctor leo. Ut tempor interdum felis pellentesque commodo.'),(2,'Sam','Question:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris congue quis urna sed sodales. Ut ac auctor leo. Ut tempor interdum felis pellentesque commodo.'),(3,'Merry','Question:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris congue quis urna sed sodales. Ut ac auctor leo. Ut tempor interdum felis pellentesque commodo.'),(4,'Pippin','Question:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris congue quis urna sed sodales. Ut ac auctor leo. Ut tempor interdum felis pellentesque commodo.'),(5,'Aragorn','Question:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris congue quis urna sed sodales. Ut ac auctor leo. Ut tempor interdum felis pellentesque commodo.'),(6,'Gandalf','Question:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris congue quis urna sed sodales. Ut ac auctor leo. Ut tempor interdum felis pellentesque commodo.'),(7,'Boromir','Question:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris congue quis urna sed sodales. Ut ac auctor leo. Ut tempor interdum felis pellentesque commodo.'),(8,'Gimli','Question:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris congue quis urna sed sodales. Ut ac auctor leo. Ut tempor interdum felis pellentesque commodo.'),(9,'Legolas','Question:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris congue quis urna sed sodales. Ut ac auctor leo. Ut tempor interdum felis pellentesque commodo.');
+INSERT INTO `heros` VALUES (1,'Frodo','Description of Frodo'),(2,'Sam','Description of Sam'),(3,'Merry','Description of Merry'),(4,'Pippin','Description of Pippin'),(5,'Aragorn','Description of Aragorn'),(6,'Gandalf','Description of Gandalf'),(7,'Boromir','Description of Boromir'),(8,'Gimli','Description of Gimli'),(9,'Legolas','Description of Legolas');
 /*!40000 ALTER TABLE `heros` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-02 18:31:14
+-- Dump completed on 2020-08-05 20:30:04

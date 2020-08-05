@@ -1,5 +1,5 @@
 USE lotr;
-INSERT INTO lotr_questions
+INSERT INTO questions
 (
     question,
     answerA,
@@ -79,7 +79,7 @@ VALUES
         'Question:Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris congue quis urna sed sodales. Ut ac auctor leo. Ut tempor interdum felis pellentesque commodo.'
     );
     
-INSERT INTO lotr_heros
+INSERT INTO heros
 (
     name,
     description
