@@ -1,0 +1,16 @@
+WHO:
+System
+WHAT:
+Should record current state of the user in the process like:
+(1) if the user's started the questionary
+(2) how many question has user already answered
+(3) if the user has already ended the questionary and was provided with the result
+
+1. If the user has not started the questionary yet and is not stored in database, every time she/he enters other page than starting page, the system will redirect her/him to starting page.
+2. If the user has answered x question and next question to answer is x+1, every time she/he enters page with other question, the system will redirect her/him to the x+1 question.
+3. If the user has already ended the questionary, every time she/he enters page with any question, the system will redirect her/him to the end page with the result.
+To 
+WHY
+So that user cannot start answering questions without entering name and starting questionary.
+So that user cannot answer each question more than once and is required to answer question in given order.
+So that user  cannot answer questions after the result is provided, unless she/he delete the data fro database.

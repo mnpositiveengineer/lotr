@@ -1,0 +1,9 @@
+WHO:
+System/application
+WHAT:
+Should calculate the result based on the table user_question_hero - group by hero_id and count.
+The result equals hero_id which exists in the user_question_hero most times for particular user.
+Once the system calculate the answer it should be insert into user table for traceability purpose.
+Result should be reflected on the screen - both name and description from heros scheme.
+WHY
+To calculat the most accurate result based on answered questions and present it on the screen.

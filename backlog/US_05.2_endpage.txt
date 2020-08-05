@@ -1,0 +1,7 @@
+WHO:
+User
+WHAT:
+Should have the ability to delete all data from database related to the user.
+Should be able to click on the button to delete all the rows connected to the user.
+WHY
+Not to store users data in database to comply with GDPR rules.
