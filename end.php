@@ -21,15 +21,21 @@
 <?php
 
 	require_once "connect.php";
-
-	$connection = @new mysqli($host, $db_user, $db_password, $db_name);
-
-	if($connection -> connect_errno != 0)
+	mysqli_report (MYSQLI_REPORT_STRICT);
+	try
 	{
-		echo "Error: ".$connection -> connect_errno;
-		exit();
+		$connection = new mysqli($host, $db_user, $db_password, $db_name);
+		if ($connection -> connect_errno!=0)
+		{
+			throw new Exception (mysqli_connect_errno());
+		}
 		
-	} else {
+	} catch(Exception $e) {
+		
+		echo 'Server error. Please try again later.';
+		echo '<br>For developer: '.$e;
+		exit();
+	}	
 		
 		session_start();
 		$id = session_id();
@@ -84,7 +90,6 @@
 		$connection -> close();
 		exit();
 		}
-	}
 ?>	
 
 	<main>
